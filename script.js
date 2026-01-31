@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const scissorsIcon = document.getElementById('scissorsIcon');
     const buttonText = document.getElementById('buttonText');
     const originalUrl = document.getElementById('originalUrl');
+    const HISTORY_KEY = "shortUrlHistory";
+    const historyList = document.getElementById("historyList");
 
     // Configuration - UPDATE THIS WITH YOUR BACKEND API ENDPOINT
     const API_ENDPOINT = 'https://url-shortener-80dc.onrender.com/shorten'; // Replace with your actual API endpoint
@@ -126,6 +128,40 @@ document.addEventListener('DOMContentLoaded', function () {
         shortUrlDisplay.textContent = 'Your shortened URL will appear here';
         originalUrl.textContent = '';
     }
+    function saveToHistory(original, short) {
+        const history = getHistory();
+
+        history.unshift({
+            original,
+            short,
+            time: new Date().toLocaleString()
+        });
+
+        // keep only last 10 entries
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(0, 10)));
+    }
+
+    function renderHistory() {
+        const history = getHistory();
+        historyList.innerHTML = "";
+
+        if (history.length === 0) {
+            historyList.innerHTML = "<li>No URLs shortened yet.</li>";
+            return;
+        }
+
+        history.forEach(item => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+            <strong>Short:</strong> 
+            <a href="${item.short}" target="_blank">${item.short}</a><br>
+            <span style="color:#64748b;">${item.original}</span><br>
+            <small style="color:#94a3b8;">${item.time}</small>
+        `;
+            historyList.appendChild(li);
+        });
+    }
+
 
     // Function to copy URL to clipboard
     async function copyToClipboard(text) {
@@ -180,6 +216,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Display the result
             displayShortUrl(longUrl, shortUrl);
+            saveToHistory(longUrl, shortUrl);
+            renderHistory();
+
             showSuccess('URL shortened successfully!');
             hideLoading();
 
@@ -240,3 +279,6 @@ document.addEventListener('DOMContentLoaded', function () {
             `;
     document.head.appendChild(style);
 });
+
+// Initialize history
+renderHistory();

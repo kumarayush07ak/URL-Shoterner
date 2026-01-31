@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- Animated Background Elements -->
     <div class="bg-blur-1"></div>
     <div class="bg-blur-2"></div>
-    
+
     <!-- Header with only site name -->
     <header>
         <nav class="navbar">
@@ -29,7 +31,7 @@
             <div class="input-box">
                 <h2>Shorten Your URLs Instantly</h2>
                 <p>Transform long, messy URLs into clean, shareable links with a single click</p>
-                
+
                 <div class="input-group">
                     <div class="input-field">
                         <i class="fas fa-link"></i>
@@ -41,18 +43,18 @@
                         <span id="buttonText">Shorten URL</span>
                     </button>
                 </div>
-                
+
                 <div class="error-message" id="errorMessage">
-                    <i class="fas fa-exclamation-circle"></i> 
+                    <i class="fas fa-exclamation-circle"></i>
                     <span id="errorText">Please enter a valid URL starting with http:// or https://</span>
                 </div>
-                
+
                 <div class="success-message" id="successMessage">
-                    <i class="fas fa-check-circle"></i> 
+                    <i class="fas fa-check-circle"></i>
                     <span id="successText">URL shortened successfully!</span>
                 </div>
             </div>
-            
+
             <!-- Result Display Area -->
             <div class="result-container" id="resultContainer">
                 <div class="result-box">
@@ -73,12 +75,21 @@
                             </div>
                         </div>
                     </div>
-                    <div id="originalUrl" class="original-url" style="margin-top: 1.5rem; font-size: 0.9rem; color: #64748b; padding: 0.8rem; background: #f8fafc; border-radius: 8px;"></div>
+                    <div id="originalUrl" class="original-url"
+                        style="margin-top: 1.5rem; font-size: 0.9rem; color: #64748b; padding: 0.8rem; background: #f8fafc; border-radius: 8px;">
+                    </div>
                 </div>
+            </div>
+            <div class="history-container">
+                <h3><i class="fas fa-history"></i> Previously Shortened URLs</h3>
+                <ul id="historyList"></ul>
             </div>
         </div>
     </main>
+    <!-- History Section -->
+
 
     <script src="script.js"></script>
 </body>
+
 </html>
