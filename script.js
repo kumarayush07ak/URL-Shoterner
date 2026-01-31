@@ -128,6 +128,10 @@ document.addEventListener('DOMContentLoaded', function () {
         shortUrlDisplay.textContent = 'Your shortened URL will appear here';
         originalUrl.textContent = '';
     }
+    function getHistory() {
+        return JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
+    }
+
     function saveToHistory(original, short) {
         const history = getHistory();
 
@@ -278,7 +282,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             `;
     document.head.appendChild(style);
+    renderHistory();
+
 });
 
-// Initialize history
-renderHistory();
