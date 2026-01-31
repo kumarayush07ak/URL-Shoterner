@@ -84,57 +84,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to shorten URL - REPLACE THIS WITH YOUR ACTUAL API CALL
     async function shortenUrl(longUrl) {
-        // TODO: Replace this with your actual API call
-        // Example implementation:
-        /*
         try {
-            const response = await fetch(API_ENDPOINT, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ url: longUrl })
-            });
-            
+            const response = await fetch(
+                `${API_ENDPOINT}?long_url=${encodeURIComponent(longUrl)}`,
+                { method: 'POST' }
+            );
+
             if (!response.ok) {
-                throw new Error(`API Error: ${response.status}`);
+                const text = await response.text();
+                throw new Error(text || 'Failed to shorten URL');
             }
-            
+
             const data = await response.json();
-            return data.shortUrl; // Adjust based on your API response structure
+
+            // backend returns: { "short_url": "https://..." }
+            return data.short_url;
+
         } catch (error) {
             console.error('API Error:', error);
             throw error;
         }
-        */
-
-        // Placeholder - Remove this and implement actual API call
-        async function shortenUrl(longUrl) {
-            try {
-                const response = await fetch(
-                    `${API_ENDPOINT}?long_url=${encodeURIComponent(longUrl)}`,
-                    {
-                        method: 'POST'
-                    }
-                );
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.detail || 'Failed to shorten URL');
-                }
-
-                const data = await response.json();
-
-                // backend returns: { "short_url": "https://..." }
-                return data.short_url;
-
-            } catch (error) {
-                console.error('API Error:', error);
-                throw error;
-            }
-        }
-
     }
+
 
     // Function to display shortened URL
     function displayShortUrl(originalUrlValue, shortUrlValue) {
