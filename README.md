@@ -1,2 +1,2 @@
 # URL-Shoterner
-HSotr your long and messy url
+Short your long and messy url
