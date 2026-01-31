@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShortURL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated Background Elements -->
+    <div class="bg-blur-1"></div>
+    <div class="bg-blur-2"></div>
+    
+    <!-- Header with only site name -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-bolt"></i>
+                ShortURL
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Input Box -->
+            <div class="input-box">
+                <h2>Shorten Your URLs Instantly</h2>
+                <p>Transform long, messy URLs into clean, shareable links with a single click</p>
+                
+                <div class="input-group">
+                    <div class="input-field">
+                        <i class="fas fa-link"></i>
+                        <input type="url" id="urlInput" placeholder="https://example.com/very-long-url-path" required>
+                    </div>
+                    <button class="btn" id="shortenBtn">
+                        <div class="loading-spinner" id="loadingSpinner"></div>
+                        <i class="fas fa-scissors" id="scissorsIcon"></i>
+                        <span id="buttonText">Shorten URL</span>
+                    </button>
+                </div>
+                
+                <div class="error-message" id="errorMessage">
+                    <i class="fas fa-exclamation-circle"></i> 
+                    <span id="errorText">Please enter a valid URL starting with http:// or https://</span>
+                </div>
+                
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i> 
+                    <span id="successText">URL shortened successfully!</span>
+                </div>
+            </div>
+            
+            <!-- Result Display Area -->
+            <div class="result-container" id="resultContainer">
+                <div class="result-box">
+                    <h3><i class="fas fa-rocket"></i> Your Short URL is Ready!</h3>
+                    <div class="result-content">
+                        <div id="shortUrlDisplay">
+                            Your shortened URL will appear here
+                        </div>
+                        <div class="short-url-container" id="shortUrlContainer" style="display: none;">
+                            <a href="#" target="_blank" class="short-url" id="shortUrlLink"></a>
+                            <div class="action-buttons">
+                                <button class="copy-btn" id="copyBtn">
+                                    <i class="far fa-copy"></i> Copy
+                                </button>
+                                <a href="#" target="_blank" class="visit-btn" id="visitBtn">
+                                    <i class="fas fa-external-link-alt"></i> Visit
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="originalUrl" class="original-url" style="margin-top: 1.5rem; font-size: 0.9rem; color: #64748b; padding: 0.8rem; background: #f8fafc; border-radius: 8px;"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
