@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const originalUrl = document.getElementById('originalUrl');
 
     // Configuration - UPDATE THIS WITH YOUR BACKEND API ENDPOINT
-    const API_ENDPOINT = 'https://url-shortener-80dc.onrender.com'; // Replace with your actual API endpoint
+    const API_ENDPOINT = 'https://url-shortener-80dc.onrender.com/shorten'; // Replace with your actual API endpoint
 
     // URL validation regex
     const urlPattern = /^(https?:\/\/)[\w.-]+\.[a-zA-Z]{2,}(\/\S*)?$/;
