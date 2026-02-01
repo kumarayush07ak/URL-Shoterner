@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const historyList = document.getElementById("historyList");
 
     // Configuration - UPDATE THIS WITH YOUR BACKEND API ENDPOINT
-    const API_ENDPOINT = 'https://url-shortener-80dc.onrender.com/shorten'; // Replace with your actual API endpoint
+    const API_ENDPOINT = 'https://url-shortener-80dc.onrender.com/shorten'; 
 
     // URL validation regex
     const urlPattern = /^(https?:\/\/)[\w.-]+\.[a-zA-Z]{2,}(\/\S*)?$/;
@@ -121,13 +121,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Function to reset display
-    function resetDisplay() {
-        shortUrlDisplay.style.display = 'block';
-        shortUrlContainer.style.display = 'none';
-        resultContainer.classList.remove('show');
-        shortUrlDisplay.textContent = 'Your shortened URL will appear here';
-        originalUrl.textContent = '';
+function resetDisplay() {
+    if (!shortUrlDisplay || !shortUrlContainer || !resultContainer) {
+        console.warn('resetDisplay: required elements not found');
+        return;
     }
+
+    shortUrlDisplay.style.display = 'block';
+    shortUrlContainer.style.display = 'none';
+    resultContainer.classList.remove('show');
+    shortUrlDisplay.textContent = 'Your shortened URL will appear here';
+    originalUrl.textContent = '';
+}
+
     function getHistory() {
         return JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
     }
