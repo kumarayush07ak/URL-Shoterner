@@ -286,3 +286,55 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+// Function to handle backend response and format history items
+function formatHistoryItem(data) {
+    if (data.originalUrl && data.shortUrl && data.time) {
+        // Structured data format
+        return `
+            <li>
+                <div class="history-item-content">
+                    <span class="history-original">${data.originalUrl}</span>
+                    <a href="${data.shortUrl}" target="_blank" class="history-short">${data.shortUrl}</a>
+                    <span class="history-time">${data.time}</span>
+                </div>
+                <div class="history-meta">
+                    <div class="history-actions">
+                        <button class="history-copy-btn" data-url="${data.shortUrl}">
+                            <i class="far fa-copy"></i> Copy
+                        </button>
+                        <a href="${data.shortUrl}" target="_blank" class="history-visit-btn">
+                            <i class="fas fa-external-link-alt"></i> Visit
+                        </a>
+                        <button class="history-delete-btn" data-id="${data.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </li>
+        `;
+    } else if (typeof data === 'string' || data.url) {
+        // Plain text or simple URL format (like your LinkedIn example)
+        const url = typeof data === 'string' ? data : data.url;
+        const time = data.time || 'Recently';
+        const id = data.id || Date.now();
+        
+        return `
+            <li class="plain-url">
+                <div class="plain-url-content">
+                    <div class="plain-url-text">
+                        <a href="${url}" target="_blank">${url}</a>
+                    </div>
+                    <span class="plain-url-time">${time}</span>
+                </div>
+                <div class="plain-url-actions">
+                    <button class="plain-url-copy-btn" data-url="${url}">
+                        <i class="far fa-copy"></i> Copy
+                    </button>
+                    <button class="plain-url-delete-btn" data-id="${id}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </li>
+        `;
+    }
+}

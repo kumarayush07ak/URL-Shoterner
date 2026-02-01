@@ -544,7 +544,116 @@ main {
     background: linear-gradient(135deg, #e879f9 0%, #ef4444 100%);
 }
 
-#historyList li {
+/* When data comes as plain text (like the LinkedIn URL example) */
+#historyList li.plain-url-item {
+    background: #f8fafc;
+    border-radius: var(--radius-md);
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: var(--transition);
+    border: 1px solid #e2e8f0;
+}
+
+#historyList li.plain-url-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: #cbd5e1;
+}
+
+#historyList li.plain-url-item::before {
+    content: '🔗';
+    font-size: 1.2rem;
+    color: #667eea;
+    flex-shrink: 0;
+}
+
+.plain-url-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.plain-url-text {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    word-break: break-all;
+    line-height: 1.4;
+}
+
+.plain-url-text a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+.plain-url-text a:hover {
+    text-decoration: underline;
+    color: #5a67d8;
+}
+
+.plain-url-time {
+    font-size: 0.75rem;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 0.3rem;
+}
+
+.plain-url-time::before {
+    content: '🕒';
+    font-size: 0.8rem;
+}
+
+.plain-url-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.plain-url-copy-btn,
+.plain-url-delete-btn {
+    padding: 0.5rem 0.8rem;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+.plain-url-copy-btn {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    color: white;
+    box-shadow: 0 4px 8px rgba(67, 233, 123, 0.3);
+}
+
+.plain-url-copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(67, 233, 123, 0.4);
+}
+
+.plain-url-delete-btn {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    box-shadow: 0 4px 8px rgba(240, 147, 251, 0.3);
+}
+
+.plain-url-delete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(240, 147, 251, 0.4);
+}
+
+/* When data comes in structured format (original URL, short URL, time) */
+#historyList li.structured-item {
     background: #f8fafc;
     border-radius: var(--radius-md);
     padding: 1.2rem;
@@ -556,13 +665,12 @@ main {
     border: 1px solid #e2e8f0;
 }
 
-#historyList li:hover {
+#historyList li.structured-item:hover {
     transform: translateX(5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     border-color: #cbd5e1;
 }
 
-/* History Item Content - Left Side */
 .history-item-content {
     flex: 1;
     display: flex;
@@ -758,10 +866,35 @@ main {
         max-height: 350px;
     }
 
-    #historyList li {
+    #historyList li.plain-url-item,
+    #historyList li.structured-item {
         flex-direction: column;
         align-items: flex-start;
-        gap: 1.2rem;
+        gap: 1rem;
+    }
+
+    #historyList li.plain-url-item::before {
+        align-self: flex-start;
+        margin-top: 0.2rem;
+    }
+
+    .plain-url-content {
+        width: 100%;
+    }
+
+    .plain-url-actions {
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 0.5rem;
+        padding-top: 0.8rem;
+        border-top: 1px solid #e2e8f0;
+    }
+
+    .plain-url-copy-btn,
+    .plain-url-delete-btn {
+        flex: 1;
+        justify-content: center;
+        min-width: 120px;
     }
 
     .history-meta {
@@ -779,6 +912,7 @@ main {
     .history-time {
         font-size: 0.75rem;
         padding: 0.3rem 0.7rem;
+        align-self: flex-start;
     }
 
     .history-actions {
@@ -791,7 +925,7 @@ main {
     .history-visit-btn {
         padding: 0.5rem 0.8rem;
         font-size: 0.75rem;
-        min-width: 80px;
+        min-width: 100px;
     }
 }
 
@@ -834,8 +968,20 @@ main {
         padding: 1.2rem;
     }
 
-    #historyList li {
+    #historyList li.plain-url-item,
+    #historyList li.structured-item {
         padding: 1rem;
+    }
+
+    .plain-url-actions {
+        flex-wrap: wrap;
+    }
+
+    .plain-url-copy-btn,
+    .plain-url-delete-btn {
+        min-width: 100px;
+        font-size: 0.7rem;
+        padding: 0.4rem 0.6rem;
     }
 
     .history-meta {
@@ -848,6 +994,7 @@ main {
 
     .history-time {
         align-self: flex-start;
+        margin-bottom: 0.5rem;
     }
 
     .history-actions {
@@ -861,7 +1008,7 @@ main {
     .history-visit-btn {
         flex: 1;
         justify-content: center;
-        min-width: 90px;
+        min-width: 100px;
         font-size: 0.7rem;
         padding: 0.4rem 0.6rem;
     }
@@ -905,9 +1052,26 @@ main {
         background: var(--card-bg);
     }
 
-    #historyList li {
+    #historyList li.plain-url-item,
+    #historyList li.structured-item {
         background: #334155;
         border-color: #475569;
+    }
+
+    .plain-url-text {
+        color: #cbd5e1;
+    }
+
+    .plain-url-text a {
+        color: #93c5fd;
+    }
+
+    .plain-url-text a:hover {
+        color: #7ab7ff;
+    }
+
+    .plain-url-time {
+        color: #94a3b8;
     }
 
     .history-original {
@@ -936,12 +1100,14 @@ main {
     }
     
     @media (max-width: 768px) {
+        .plain-url-actions,
         .history-meta {
             border-top-color: #475569;
         }
     }
     
     @media (max-width: 480px) {
+        .plain-url-actions,
         .history-meta {
             border-top-color: #475569;
         }
